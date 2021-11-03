@@ -49,6 +49,11 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public Rigidbody playerBody;
 
+    public GameObject player;
+
+    private Vector2 turn;
+    private float sensitivity = 2f;
+
     private void Awake()
     {
         forward = new KeyControl(KeyCode.W, () => AddForce(Vector3.forward), () => AddForce(-Vector3.forward));
@@ -95,6 +100,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         DontDestroyOnLoad(gameObject);
+
+        Cursor.visible = false;
     }
 
     
@@ -102,7 +109,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
-        
+        //move camera to player
+        //lerp towards target position
+
     }
 
     void LateUpdate()
@@ -142,17 +151,18 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
                     pressedKeys.Remove(key);
                 }
             }
-
-            //move camera to player
-            //lerp towards target position
-            var newPos = Vector3.Lerp(camera.transform.position, localPlayerBody.transform.position + camPosOffset, .1f);
-            Debug.Log("before: " + camera.transform.position);
-            camera.transform.position = newPos;
-            Debug.Log("after: " + camera.transform.position);
-            //look at target
-            camera.transform.LookAt(localPlayerBody.transform.position + camLookOffset, Vector3.up);
         }
+
+        //Player rotate with mouse
+        //Move this to PhotonView.IsMine condition
+        turn.x += Input.GetAxis("Mouse X") * sensitivity;
+        turn.y += Input.GetAxis("Mouse Y") * sensitivity;
+        player.transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
+        //camera.transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
     }
+
+
+    private Vector3 velocity = Vector3.zero;
 
     private void FixedUpdate()
     {
@@ -160,6 +170,19 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         //apply forces to rigidbody
         playerBody.velocity = Vector3.Lerp(playerBody.velocity, LocalDir(transform, desiredForce) * speed, .2f);
         //playerBody.angularVelocity = Vector3.Lerp(playerBody.angularVelocity, LocalDir(transform, desiredTorque) * 3, .2f);
+
+        float desiredAngle = player.transform.eulerAngles.y;
+        float desiredAngleX = player.transform.eulerAngles.x;
+        Quaternion rotation = Quaternion.Euler(desiredAngleX, desiredAngle, 0);
+
+        var newPos = Vector3.Lerp(camera.transform.position, localPlayerBody.transform.position + camPosOffset, .1f);
+        camera.transform.position = newPos + (rotation * camPosOffset);
+
+
+        //look at target
+        camera.transform.LookAt(localPlayerBody.position + camLookOffset, Vector3.up);
+        camera.transform.rotation = player.transform.rotation;
+        
     }
     public static Vector3 LocalDir(Transform transform, Vector3 worldDir)
     {

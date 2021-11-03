@@ -25,6 +25,6 @@ public class TeamMaterial : MonoBehaviour
 
     void SetColor()
     {
-        renderer.materials[0].SetColor("TeamColor", TeamManager.instance.teams[teamID]);
+        //renderer.materials[0].SetColor("TeamColor", TeamManager.instance.teams[teamID]);
     }
 }
