@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1601712673643235528}
   - component: {fileID: 8554514747161232589}
   - component: {fileID: 3200538517464179446}
+  - component: {fileID: 7326730156576427747}
   m_Layer: 0
   m_Name: planeBase
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7326730156576427747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460297239446811529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c45601c58e5ea54cb61b87cafa5e2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 3200538517464179446}
+  teamID: 2
 --- !u!1 &895947195561914060
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,6 +137,7 @@ GameObject:
   - component: {fileID: 8137693738327921431}
   - component: {fileID: 6751051989973851150}
   - component: {fileID: 766942616305113341}
+  - component: {fileID: 6456670351957780735}
   m_Layer: 0
   m_Name: planeWings
   m_TagString: Untagged
@@ -192,6 +208,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6456670351957780735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438374558539830394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c45601c58e5ea54cb61b87cafa5e2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 766942616305113341}
+  teamID: 2
 --- !u!1 &4192069556232322863
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +395,7 @@ GameObject:
   - component: {fileID: 9183214131496760991}
   - component: {fileID: 2883364578363533912}
   - component: {fileID: 6710122541969801219}
+  - component: {fileID: 6531930505167691948}
   m_Layer: 0
   m_Name: planeTailFins
   m_TagString: Untagged
@@ -435,6 +466,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6531930505167691948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5680512560216190654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c45601c58e5ea54cb61b87cafa5e2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 6710122541969801219}
+  teamID: 2
 --- !u!1 &5693826437338348090
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +572,7 @@ GameObject:
   - component: {fileID: 6505871442063234359}
   - component: {fileID: 2820479858984415770}
   - component: {fileID: 638578635786284378}
+  - component: {fileID: 1155225013491632507}
   m_Layer: 0
   m_Name: planePropeller2
   m_TagString: Untagged
@@ -597,6 +643,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1155225013491632507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808526381529948164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c45601c58e5ea54cb61b87cafa5e2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 638578635786284378}
+  teamID: 0
 --- !u!1 &6953934809743174519
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,11 +666,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7767168328170697165}
+  - component: {fileID: 8956491518118093518}
   - component: {fileID: 4403772610286456525}
   - component: {fileID: 2186738510920010802}
   - component: {fileID: 1202598188503647674}
+  - component: {fileID: 7143962406931105747}
+  - component: {fileID: 2414350849504655010}
+  - component: {fileID: 4395189694227024740}
   m_Layer: 0
-  m_Name: Biplane_1
+  m_Name: Biplane_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -639,6 +703,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8956491518118093518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953934809743174519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 2186738510920010802}
+  - {fileID: 7143962406931105747}
+  - {fileID: 2414350849504655010}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!114 &4403772610286456525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,6 +766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   escMenu: {fileID: 0}
+  playerAnimator: {fileID: 0}
   camera: {fileID: 5022992549856310069}
   camPosOffset: {x: 0, y: 0, z: 0}
   camLookOffset: {x: 0, y: 0, z: 0}
@@ -699,6 +789,57 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7143962406931105747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953934809743174519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &2414350849504655010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953934809743174519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
+--- !u!95 &4395189694227024740
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953934809743174519}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8986285407849477928
 GameObject:
   m_ObjectHideFlags: 0

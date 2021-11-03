@@ -6,6 +6,7 @@ using Photon.Pun;
 public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     public GameObject escMenu;
+    public PhotonAnimatorView playerAnimator;
 
     public static GameObject LocalPlayerInstance;
     public Rigidbody localPlayerBody
@@ -39,7 +40,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     KeyControl yawLeft;
     KeyControl yawRight;
     KeyControl breaks;
-    KeyControl takeoff;
+    KeyControl engineToggle;
     KeyControl turbo;
     KeyControl esc;
 
@@ -56,15 +57,16 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         right = new KeyControl(KeyCode.D, () => AddForce(Vector3.right), () => AddForce(-Vector3.right));
         //down = new KeyControl(KeyCode.LeftControl, () => AddForce(Vector3.down), () => AddForce(-Vector3.down));
         //up = new KeyControl(KeyCode.Space, () => AddForce(Vector3.up), () => AddForce(-Vector3.up));
-        //pitchUp = new KeyControl(KeyCode.DownArrow, () => AddForce(Vector3.left, true), () => AddForce(-Vector3.left, true));
-        //pitchDown = new KeyControl(KeyCode.UpArrow, () => AddForce(Vector3.right, true), () => AddForce(-Vector3.right, true));
-        //rollLeft = new KeyControl(KeyCode.Q, () => AddForce(Vector3.forward, true), () => AddForce(-Vector3.forward, true));
-        //rollRight = new KeyControl(KeyCode.E, () => AddForce(Vector3.back, true), () => AddForce(-Vector3.back, true));
+        pitchUp = new KeyControl(KeyCode.DownArrow, () => AddForce(Vector3.left, true), () => AddForce(-Vector3.left, true));
+        pitchDown = new KeyControl(KeyCode.UpArrow, () => AddForce(Vector3.right, true), () => AddForce(-Vector3.right, true));
+        rollLeft = new KeyControl(KeyCode.Q, () => AddForce(Vector3.forward, true), () => AddForce(-Vector3.forward, true));
+        rollRight = new KeyControl(KeyCode.E, () => AddForce(Vector3.back, true), () => AddForce(-Vector3.back, true));
         yawLeft = new KeyControl(KeyCode.LeftArrow, () => AddForce(Vector3.down, true), () => AddForce(-Vector3.down, true));
         yawRight = new KeyControl(KeyCode.RightArrow, () => AddForce(Vector3.up, true), () => AddForce(-Vector3.up, true));
         //breaks = new KeyControl(KeyCode.R, () => Breaks(), () => { });
+        engineToggle = new KeyControl(KeyCode.T, () => { }, () => { });
         turbo = new KeyControl(KeyCode.LeftShift, () => speed += 10, () => speed -= 10);
-        esc = new KeyControl(KeyCode.Escape, () => { }, () => { escMenu.active = !escMenu.active; });
+        esc = new KeyControl(KeyCode.Escape, () => { }, () => { escMenu.SetActive(!escMenu.activeInHierarchy);});
 
         boundKeys = new List<KeyControl> {
             forward,
@@ -73,14 +75,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             right,
             //up,
             //down,
-            //pitchUp,
-            //pitchDown,
-            //rollLeft,
-            //rollRight,
+            pitchUp,
+            pitchDown,
+            rollLeft,
+            rollRight,
             yawLeft,
             yawRight,
             //breaks,
-            //takeoff,
+            engineToggle,
             turbo,
             esc
         };
