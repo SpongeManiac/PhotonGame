@@ -149,7 +149,7 @@ public class GameLauncher : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             //we are the first player, load the scene
-            PhotonNetwork.LoadLevel("TestRoom");
+            PhotonNetwork.LoadLevel("DefaultMap");
         }
     }
     #endregion

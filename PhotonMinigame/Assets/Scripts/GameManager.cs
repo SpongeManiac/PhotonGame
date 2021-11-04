@@ -7,17 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    public GameObject playerPrefab;
-    public Transform spawnLocation;
+    public SpawnManager spawner;
 
     public void Start()
     {
         if (PlayerManager.LocalPlayerInstance == null)
         {
-            //create local player
-            PhotonNetwork.Instantiate(playerPrefab.name, spawnLocation.position, Quaternion.identity, 0);
+            spawner.StartSpawnNew();
         }
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public override void OnLeftRoom()
@@ -51,19 +48,5 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("Master Client left.");
         }
-    }
-    void OnMouseDown()
-    {
-        // Lock the cursor
-
-    }
-
-    private void Update()
-    {
-        // In standalone player we have to provide our own key
-        // input for unlocking the cursor
-        if (Input.GetKeyDown("escape"))
-            Screen.lockCursor = false;
-
     }
 }
