@@ -5,15 +5,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviourPunCallbacks
+public class TestGameManager : MonoBehaviourPunCallbacks
 {
-    public SpawnManager spawner;
+    public GameObject playerPrefab;
+    public Transform spawnLocation;
 
     public void Start()
     {
         if (PlayerManager.LocalPlayerInstance == null)
         {
-            spawner.StartSpawnNew();
+            //create local player
+            PhotonNetwork.Instantiate(playerPrefab.name, spawnLocation.position, Quaternion.identity, 0);
         }
     }
 
