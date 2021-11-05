@@ -27,6 +27,22 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public float speed = 40f;
     public float baseSpeed = 40f;
 
+    public GameObject bullet;
+
+    public float shootForce, upwardForce;
+    public int magazineSize, bulletsPerTap;
+    public float spread, timeBetweenShooting, timeBetweenShots, reloadTime;
+    public bool allowButtonHold;
+
+    public Transform attackPoint;
+
+    public bool allowInvoke = true;
+
+    int bulletsLeft, bulletsShot;
+
+    bool shooting, readyToShoot, reloading;
+
+
     Vector3 desiredForce = Vector3.zero;
     Vector3 desiredTorque = Vector3.zero;
 
@@ -78,7 +94,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             yawRight = new KeyControl(KeyCode.RightArrow, () => AddForce(Vector3.up, true), () => AddForce(-Vector3.up, true));
             
             //Leftmouse fire      //keycode        //OnDown  //OnUp
-            fire = new KeyControl(KeyCode.Mouse0, () => { }, () => { });
+            fire = new KeyControl(KeyCode.LeftControl, () => {shooting = true;}, () => { });
             engineToggle = new KeyControl(KeyCode.T, () => { }, () => { });
             turbo = new KeyControl(KeyCode.LeftShift, () => speed += 10, () => speed -= 10);
             esc = new KeyControl(KeyCode.Escape, () => { }, () => { escMenu.SetActive(!escMenu.activeInHierarchy); });
@@ -111,6 +127,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             //disable collission, physics, etc
             playerBody.isKinematic = true;
         }
+        bulletsLeft = magazineSize;
+        readyToShoot = true;
     }
 
     
@@ -157,6 +175,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
                     pressedKeys.Remove(key);
                 }
             }
+            MyInput();
         }
     }
 
@@ -217,5 +236,91 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             //we own this player, send other players our data
             //stream.SendNext();
         }
+    }
+
+
+    private void MyInput()
+    {
+        //if (allowbuttonhold) shooting = input.getkey(keycode.mouse0);
+        //else shooting = input.getkeydown(keycode.mouse0);
+
+        ////reloading
+        //if (input.getkeydown(keycode.r) && bulletsleft < magazinesize && !reloading) reload();
+        //Reload automatically when trying to shoot without ammo
+        if (readyToShoot && shooting && !reloading && bulletsLeft <= 0) Reload();
+
+        //Shooting
+        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        {
+            bulletsShot = 0;
+
+            Shoot();
+        }
+    }
+
+    private void Shoot()
+    {
+        readyToShoot = false;
+
+        //Find the exact hit position using a raycast
+        Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        //Check if ray hits something
+        Vector3 targetPoint;
+        if (Physics.Raycast(ray, out hit))
+            targetPoint = hit.point;
+        else
+            targetPoint = ray.GetPoint(75);
+
+        //Calculate direction from attackPoint to targetPoint
+        Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
+
+        //Calculate spread
+        float x = Random.Range(-spread, spread);
+        float y = Random.Range(-spread, spread);
+
+        //Calculate new direction with spread;
+        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
+
+        //Instantiate bullet/projectile
+        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
+        currentBullet.transform.forward = directionWithSpread.normalized;
+
+        //Add force to bullet
+        currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+        currentBullet.GetComponent<Rigidbody>().AddForce(camera.transform.up * upwardForce, ForceMode.Impulse);
+
+        bulletsLeft--;
+        bulletsShot++;
+
+        //Invoke resetShot function (if not already invoked)
+        if (allowInvoke)
+        {
+            Invoke("ResetShot", timeBetweenShooting);
+            allowInvoke = false;
+        }
+
+        //if more than one bulletsPerTap
+        if (bulletsShot < bulletsPerTap && bulletsLeft > 0)
+            Invoke("Shoot", timeBetweenShots);
+    }
+
+    private void ResetShot()
+    {
+        readyToShoot = true;
+        allowInvoke = true;
+    }
+
+    private void Reload()
+    {
+        reloading = true;
+        Invoke("ReloadFinished", reloadTime);
+    }
+
+    private void ReloadFinished()
+    {
+        bulletsLeft = magazineSize;
+        reloading = false;
     }
 }
