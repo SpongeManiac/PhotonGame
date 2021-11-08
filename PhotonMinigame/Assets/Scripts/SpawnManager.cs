@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     public GameObject team1Prefab;
     public GameObject team2Prefab;
@@ -62,7 +62,8 @@ public class SpawnManager : MonoBehaviour
         else
         {
             //spawn is available, spawn user here
-            PlayerManager.LocalPlayerInstance = PhotonNetwork.Instantiate(prefab.name, list[spawnNum].position, list[spawnNum].rotation);
+            PlayerManager.LocalPlayerInstance = PhotonNetwork.Instantiate(prefab.name,
+                list[spawnNum].position, list[spawnNum].rotation);
             team = !team;
             return true;
         }
@@ -121,6 +122,18 @@ public class SpawnManager : MonoBehaviour
             {
                 spawned = true;
             }
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(team);
+        }
+        else
+        {
+            this.team = (bool)stream.ReceiveNext();
         }
     }
 }

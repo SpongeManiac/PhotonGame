@@ -1116,6 +1116,18 @@ MonoBehaviour:
   camLookOffset: {fileID: 3472785191772008242}
   speed: 40
   baseSpeed: 40
+  bullet: {fileID: 0}
+  shootForce: 0
+  upwardForce: 0
+  magazineSize: 0
+  bulletsPerTap: 0
+  spread: 0
+  timeBetweenShooting: 0
+  timeBetweenShots: 0
+  reloadTime: 0
+  allowButtonHold: 0
+  attackPoint: {fileID: 0}
+  allowInvoke: 1
   playerBody: {fileID: 1202598188503647674}
 --- !u!54 &1202598188503647674
 Rigidbody:
