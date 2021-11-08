@@ -236,6 +236,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             //we own this player, send other players our data
             //stream.SendNext();
         }
+        else
+        {
+            
+        }
     }
 
 
