@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -37,6 +38,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public Transform attackPoint;
 
     public bool allowInvoke = true;
+
+    public Text magazineText;
 
     int bulletsLeft, bulletsShot;
 
@@ -131,6 +134,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        magazineText = GameObject.Find("Magazine").GetComponent<Text>();
     }
 
     
@@ -192,7 +196,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
                     Shoot();
                 }
             }
-            
+
+            magazineText.text = bulletsLeft.ToString()+ " / " + magazineSize.ToString();
+
+
         }
     }
 
@@ -304,7 +311,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         //Instantiate bullet/projectile
         GameObject currentBullet = PhotonNetwork.Instantiate(bullet.name, attackPoint.position, transform.localRotation);
         currentBullet.transform.forward = directionWithSpread.normalized;
-
         //Add force to bullet
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Rigidbody>().AddForce(camera.transform.up * upwardForce, ForceMode.Impulse);
