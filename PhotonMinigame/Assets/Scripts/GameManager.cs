@@ -18,13 +18,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             spawner.StartSpawnNew();
         }
-        
-
-    }
-    [PunRPC]
-    public void NewSkyBox()
-    {
-        RenderSettings.skybox = skybox[Random.Range(0, 5)];
     }
 
     public override void OnLeftRoom()
