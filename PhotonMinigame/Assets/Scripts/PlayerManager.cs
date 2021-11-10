@@ -94,7 +94,19 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             yawRight = new KeyControl(KeyCode.RightArrow, () => AddForce(Vector3.up, true), () => AddForce(-Vector3.up, true));
             
             //Leftmouse fire      //keycode        //OnDown  //OnUp
-            fire = new KeyControl(KeyCode.LeftControl, () => {shooting = true;}, () => { });
+            
+            fire = new KeyControl(KeyCode.C, () => {
+                shooting = true;
+                //Reload automatically when trying to shoot without ammo
+                if (readyToShoot && shooting && !reloading && bulletsLeft <= 0) Reload();
+
+                //Shooting
+                if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+                {
+                    bulletsShot = 0;
+                    Shoot();
+                }
+            }, () => { });
             engineToggle = new KeyControl(KeyCode.T, () => { }, () => { });
             turbo = new KeyControl(KeyCode.LeftShift, () => speed += 10, () => speed -= 10);
             esc = new KeyControl(KeyCode.Escape, () => { }, () => { escMenu.SetActive(!escMenu.activeInHierarchy); });
@@ -115,7 +127,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             //breaks,
             engineToggle,
             turbo,
-            esc
+            esc,
+            fire
             };
             PlayerManager.LocalPlayerInstance = gameObject;
             camera = Camera.main;
@@ -174,8 +187,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
                     //remove key from list of pressed keys
                     pressedKeys.Remove(key);
                 }
+                
             }
-            MyInput();
+            
         }
     }
 
@@ -260,6 +274,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Shoot()
     {
+        Debug.Log("Shooting");
         readyToShoot = false;
 
         //Find the exact hit position using a raycast
