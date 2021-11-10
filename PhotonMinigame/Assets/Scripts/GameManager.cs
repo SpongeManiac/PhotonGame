@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         
 
     }
-
+    [PunRPC]
     public void NewSkyBox()
     {
         RenderSettings.skybox = skybox[Random.Range(0, 5)];
