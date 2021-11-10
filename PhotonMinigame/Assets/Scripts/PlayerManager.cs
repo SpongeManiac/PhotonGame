@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public Text magazineText;
 
-    public Material[] skybox;
+    public SkyboxManager skyboxManager;
 
     int bulletsLeft, bulletsShot;
 
@@ -144,10 +144,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
+        skyboxManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SkyboxManager>();
         if (PhotonNetwork.IsMasterClient)
         {
-            RenderSettings.skybox = skybox[Random.Range(0, 5)];
-        }  
+            skyboxManager.skybox = Random.Range(0, 5);
+            //skyboxManager.SetSkybox();
+        }
     }
 
     void LateUpdate()

@@ -7,6 +7,7 @@ TagManager:
   - EscMenu
   - Team2
   - Team1
+  - GameManager
   layers:
   - Default
   - TransparentFX

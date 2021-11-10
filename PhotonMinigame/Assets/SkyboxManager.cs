@@ -5,18 +5,36 @@ using Photon.Pun;
 
 public class SkyboxManager : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public Material skyboxmat;
+    public int skybox
+    {
+        get
+        {
+            return _skybox;
+        }
+        set
+        {
+            SetSkybox();
+            _skybox = value;
+        }
+    }
+    int _skybox;
+
+    public Material[] skyboxes;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(skyboxmat);
+            stream.SendNext(skybox);
         }
         else
         {
-            this.skyboxmat = (Material)stream.ReceiveNext();
-            RenderSettings.skybox = skyboxmat;
+            this.skybox = (int)stream.ReceiveNext();
         }
+    }
+
+    public void SetSkybox()
+    {
+        RenderSettings.skybox = skyboxes[skybox];
     }
 }

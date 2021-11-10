@@ -40,11 +40,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.Log("Master Client joined.");
+            
         }
-        //RenderSettings.skybox = selectedSkybox;
-        photonView.RPC("NewSkyBox", RpcTarget.AllViaServer);
-
-
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
