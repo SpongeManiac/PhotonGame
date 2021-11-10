@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - EscMenu
+  - Team2
+  - Team1
   layers:
   - Default
   - TransparentFX
@@ -12,10 +14,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Team1
+  - Team2
+  - Bullet1
+  - Bullet2
   - 
   - 
   - 
