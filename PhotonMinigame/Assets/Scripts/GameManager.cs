@@ -18,11 +18,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             spawner.StartSpawnNew();
         }
-        photonView.RPC("NewSkyBox", RpcTarget.All);
+        
 
     }
 
-    [PunRPC]
     public void NewSkyBox()
     {
         RenderSettings.skybox = skybox[Random.Range(0, 5)];
@@ -48,7 +47,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.Log("Master Client joined.");
+            photonView.RPC("NewSkyBox", RpcTarget.AllViaServer);
         }
+        //RenderSettings.skybox = selectedSkybox;
 
 
     }
