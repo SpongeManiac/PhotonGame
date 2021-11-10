@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public SpawnManager spawner;
+    public Material[] skybox;
+    private Material selectedSkybox;
 
     public void Start()
     {
@@ -15,6 +17,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             spawner.StartSpawnNew();
         }
+        selectedSkybox = skybox[Random.Range(0, 5)];
+        RenderSettings.skybox = selectedSkybox;
     }
 
     public override void OnLeftRoom()
@@ -38,7 +42,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("Master Client joined.");
         }
-        
+        RenderSettings.skybox = selectedSkybox;
+
+
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)

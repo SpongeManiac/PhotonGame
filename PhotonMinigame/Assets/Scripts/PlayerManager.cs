@@ -297,7 +297,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         //Check if ray hits something
         Vector3 targetPoint;
         if (Physics.Raycast(ray, out hit))
-            targetPoint = hit.point;
+            targetPoint = hit.point - new Vector3(0f,5f,0);
         else
             targetPoint = ray.GetPoint(75);
 
