@@ -277,7 +277,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Shoot()
     {
-        Debug.Log("Shooting");
+        //Debug.Log("Shooting");
         readyToShoot = false;
 
         //Find the exact hit position using a raycast
@@ -302,7 +302,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
 
         //Instantiate bullet/projectile
-        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
+        GameObject currentBullet = PhotonNetwork.Instantiate(bullet.name, attackPoint.position, transform.localRotation);
         currentBullet.transform.forward = directionWithSpread.normalized;
 
         //Add force to bullet
