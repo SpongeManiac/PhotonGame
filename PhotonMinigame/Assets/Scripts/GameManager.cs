@@ -9,16 +9,22 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public SpawnManager spawner;
     public Material[] skybox;
-    private Material selectedSkybox;
+    public PhotonView photonView;
 
     public void Start()
     {
+        photonView = GetComponent<PhotonView>();
         if (PlayerManager.LocalPlayerInstance == null)
         {
             spawner.StartSpawnNew();
         }
-        selectedSkybox = skybox[Random.Range(0, 5)];
-        RenderSettings.skybox = selectedSkybox;
+        photonView.RPC("NewSkyBox", RpcTarget.AllViaServer, 0);
+
+    }
+
+    public void NewSkyBox()
+    {
+        RenderSettings.skybox = skybox[Random.Range(0, 5)];
     }
 
     public override void OnLeftRoom()
