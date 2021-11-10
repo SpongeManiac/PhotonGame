@@ -92,21 +92,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             rollRight = new KeyControl(KeyCode.E, () => AddForce(Vector3.back, true), () => AddForce(-Vector3.back, true));
             yawLeft = new KeyControl(KeyCode.LeftArrow, () => AddForce(Vector3.down, true), () => AddForce(-Vector3.down, true));
             yawRight = new KeyControl(KeyCode.RightArrow, () => AddForce(Vector3.up, true), () => AddForce(-Vector3.up, true));
-            
-            //Leftmouse fire      //keycode        //OnDown  //OnUp
-            
-            fire = new KeyControl(KeyCode.C, () => {
-                shooting = true;
-                //Reload automatically when trying to shoot without ammo
-                if (readyToShoot && shooting && !reloading && bulletsLeft <= 0) Reload();
 
-                //Shooting
-                if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
-                {
-                    bulletsShot = 0;
-                    Shoot();
-                }
-            }, () => { });
+            //Leftmouse fire      //keycode        //OnDown  //OnUp
+
+            fire = new KeyControl(KeyCode.C, () => shooting = true, () => shooting = false);
             engineToggle = new KeyControl(KeyCode.T, () => { }, () => { });
             turbo = new KeyControl(KeyCode.LeftShift, () => speed += 10, () => speed -= 10);
             esc = new KeyControl(KeyCode.Escape, () => { }, () => { escMenu.SetActive(!escMenu.activeInHierarchy); });
@@ -188,6 +177,20 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
                     pressedKeys.Remove(key);
                 }
                 
+            }
+
+            //check if player is shooting
+            if (shooting)
+            {
+                //Reload automatically when trying to shoot without ammo
+                if (readyToShoot && shooting && !reloading && bulletsLeft <= 0) Reload();
+
+                //Shooting
+                if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+                {
+                    bulletsShot = 0;
+                    Shoot();
+                }
             }
             
         }
