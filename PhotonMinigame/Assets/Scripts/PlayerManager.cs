@@ -312,7 +312,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
 
         //Instantiate bullet/projectile
-        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
+        GameObject currentBullet = PhotonNetwork.Instantiate(bullet.name, attackPoint.position, transform.rotation);
         currentBullet.transform.forward = directionWithSpread.normalized;
 
         //Add force to bullet
