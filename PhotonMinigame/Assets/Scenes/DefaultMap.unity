@@ -1109,6 +1109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1448868021}
+  - component: {fileID: 1448868023}
   - component: {fileID: 1448868020}
   - component: {fileID: 1448868019}
   - component: {fileID: 1448868022}
@@ -1131,7 +1132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a29f8d5c28cdfe4d83412747151ee66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team1Prefab: {fileID: 6953934809743174519, guid: ee37efff88bd847419f9678c9ce998b1, type: 3}
+  team1Prefab: {fileID: 6953934809743174519, guid: 495889faf8b981946895c81e53c04239, type: 3}
   team2Prefab: {fileID: 6953934809743174519, guid: 099ad430e01ebb54fb1d3a376deaf848, type: 3}
   Center: {fileID: 722631855}
   team1spawns:
@@ -1183,6 +1184,29 @@ MonoBehaviour:
   teams:
   - {r: 0, g: 0, b: 1, a: 0}
   - {r: 1, g: 0, b: 0, a: 0}
+--- !u!114 &1448868023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448868018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 1448868019}
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1597265463
 GameObject:
   m_ObjectHideFlags: 0

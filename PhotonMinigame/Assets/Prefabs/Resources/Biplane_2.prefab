@@ -1122,17 +1122,17 @@ MonoBehaviour:
   camLookOffset: {fileID: 3472785191772008242}
   speed: 40
   baseSpeed: 40
-  bullet: {fileID: 72023859358148579, guid: dbb18b49aab818445b4b06ef52d78af2, type: 3}
-  shootForce: 300
+  bullet: {fileID: 0}
+  shootForce: 0
   upwardForce: 0
-  magazineSize: 100
-  bulletsPerTap: 1
-  spread: 0.3
-  timeBetweenShooting: 0.1
+  magazineSize: 0
+  bulletsPerTap: 0
+  spread: 0
+  timeBetweenShooting: 0
   timeBetweenShots: 0
-  reloadTime: 3
-  allowButtonHold: 1
-  attackPoint: {fileID: 8971726730309733776}
+  reloadTime: 0
+  allowButtonHold: 0
+  attackPoint: {fileID: 0}
   allowInvoke: 1
   playerBody: {fileID: 1202598188503647674}
 --- !u!54 &1202598188503647674
