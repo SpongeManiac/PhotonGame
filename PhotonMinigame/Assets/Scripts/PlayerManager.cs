@@ -8,19 +8,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     public bool team;
 
-    public static GameObject LocalPlayerInstance;
-
-    public GameObject escMenu;
     public PhotonAnimatorView playerAnimator;
     
     public Rigidbody localPlayerBody
     {
         get
         {
-            return LocalPlayerInstance.GetComponentInChildren<Rigidbody>();
+            return GameManager.LocalPlayerInstance.GetComponentInChildren<Rigidbody>();
         }
     }
-    public Camera camera;
 
     public Transform camPosOffset;
     public Transform camLookOffset;
@@ -40,8 +36,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public bool allowInvoke = true;
 
     public Text magazineText;
-
-    public SkyboxManager skyboxManager;
 
     int bulletsLeft, bulletsShot;
 
@@ -80,8 +74,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Awake()
     {
-        
-
         if (photonView.IsMine)
         {
 
@@ -103,7 +95,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             fire = new KeyControl(KeyCode.C, () => shooting = true, () => shooting = false);
             engineToggle = new KeyControl(KeyCode.T, () => { }, () => { });
             turbo = new KeyControl(KeyCode.LeftShift, () => speed += 10, () => speed -= 10);
-            esc = new KeyControl(KeyCode.Escape, () => { }, () => { escMenu.SetActive(!escMenu.activeInHierarchy); });
+            esc = new KeyControl(KeyCode.Escape, () => { }, () => { GameManager.escMenu.SetActive(!GameManager.escMenu.activeInHierarchy);});
 
             boundKeys = new List<KeyControl> {
             forward,
@@ -124,9 +116,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             esc,
             fire
             };
-            PlayerManager.LocalPlayerInstance = gameObject;
-            camera = Camera.main;
-            escMenu = GameObject.FindGameObjectWithTag("EscMenu");
+            GameManager.LocalPlayerInstance = gameObject;
+            
 
         }
         else
@@ -144,12 +135,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
-        skyboxManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SkyboxManager>();
-        if (PhotonNetwork.IsMasterClient)
-        {
-            skyboxManager.skybox = Random.Range(0, 5);
-            //skyboxManager.SetSkybox();
-        }
     }
 
     void LateUpdate()
@@ -235,12 +220,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             //Debug.Log("Updating player's camera");
             //move camera to player
             //lerp towards target position
-            var newPos = Vector3.Lerp(camera.transform.position, camPosOffset.position, .1f);
+            var newPos = Vector3.Lerp(Camera.main.transform.position, camPosOffset.position, .1f);
             //Debug.Log("before: " + camera.transform.position);
-            camera.transform.position = newPos;
+            Camera.main.transform.position = newPos;
             //Debug.Log("after: " + camera.transform.position);
             //look at target
-            camera.transform.LookAt(camLookOffset, LocalDir(transform, Vector3.up));
+            Camera.main.transform.LookAt(camLookOffset, LocalDir(transform, Vector3.up));
         }
         
     }
@@ -273,32 +258,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-
-    private void MyInput()
-    {
-        //if (allowbuttonhold) shooting = input.getkey(keycode.mouse0);
-        //else shooting = input.getkeydown(keycode.mouse0);
-
-        ////reloading
-        //if (input.getkeydown(keycode.r) && bulletsleft < magazinesize && !reloading) reload();
-        //Reload automatically when trying to shoot without ammo
-        if (readyToShoot && shooting && !reloading && bulletsLeft <= 0) Reload();
-
-        //Shooting
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
-        {
-            bulletsShot = 0;
-
-            Shoot();
-        }
-    }
-
     private void Shoot()
     {
         readyToShoot = false;
 
         //Find the exact hit position using a raycast
-        Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
         //Check if ray hits something
@@ -324,7 +289,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
         //Add force to bullet
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
-        currentBullet.GetComponent<Rigidbody>().AddForce(camera.transform.up * upwardForce, ForceMode.Impulse);
+        currentBullet.GetComponent<Rigidbody>().AddForce(Camera.main.transform.up * upwardForce, ForceMode.Impulse);
 
         bulletsLeft--;
         bulletsShot++;

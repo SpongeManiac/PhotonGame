@@ -7,16 +7,27 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    public SpawnManager spawner;
-    public Material[] skybox;
-    public PhotonView photonView;
+    public SpawnManager spawnManager;
+    public SkyboxManager skyboxManager;
+    public GameObject escapeMenu;
+
+    public static GameObject escMenu;
+    public static GameObject LocalPlayerInstance;
+
+    public void Awake()
+    {
+        escMenu = escapeMenu;
+    }
 
     public void Start()
     {
-        photonView = GetComponent<PhotonView>();
-        if (PlayerManager.LocalPlayerInstance == null)
+        if (PhotonNetwork.IsMasterClient)
         {
-            spawner.StartSpawnNew();
+            skyboxManager.skybox = Random.Range(0, 5);
+        }
+        if (LocalPlayerInstance == null)
+        {
+            spawnManager.StartSpawnNew();
         }
     }
 
@@ -30,6 +41,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         //disconnects player
         PhotonNetwork.LeaveRoom();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)

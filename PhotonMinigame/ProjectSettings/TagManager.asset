@@ -8,6 +8,7 @@ TagManager:
   - Team2
   - Team1
   - GameManager
+  - HUD
   layers:
   - Default
   - TransparentFX

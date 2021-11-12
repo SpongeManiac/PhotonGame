@@ -39,12 +39,12 @@ public class SpawnManager : MonoBehaviourPunCallbacks, IPunObservable
         StartCoroutine(CheckSpawnNew(1f));
     }
 
-    public void StartSpawn(int team, GameObject player)
+    public void StartSpawn()
     {
-        StartCoroutine(CheckSpawn(1f, team, player));
+        StartCoroutine(CheckSpawn());
     }
 
-    public bool SpawnNew()
+    bool SpawnNew()
     {
         Debug.Log("Spawning New Player");
         var prefab = team ? team1Prefab : team2Prefab;
@@ -62,7 +62,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks, IPunObservable
         else
         {
             //spawn is available, spawn user here
-            PlayerManager.LocalPlayerInstance = PhotonNetwork.Instantiate(prefab.name,
+            GameManager.LocalPlayerInstance = PhotonNetwork.Instantiate(prefab.name,
                 list[spawnNum].position, list[spawnNum].rotation);
             team = !team;
             return true;
@@ -70,50 +70,51 @@ public class SpawnManager : MonoBehaviourPunCallbacks, IPunObservable
         
     }
 
-    public bool Spawn(int team, GameObject player)
+    public bool Respawn()
     {
-        var prefab = team == 1 ? team1Prefab : team2Prefab;
-        var list = team == 1 ? team1spawns : team2spawns;
+        if (GameManager.LocalPlayerInstance == null)
+        {
+            return false;
+        }
+        GameObject player = GameManager.LocalPlayerInstance;
+        PlayerManager playerManager = player.GetComponent<PlayerManager>();
+        var list = playerManager.team ? team1spawns : team2spawns;
         //get random spawn for team
         int spawnNum = Random.Range(0, list.Count);
         //check if spawn has a cooldown
-        if (list[spawnNum])
+        if (spawnTimers[list[spawnNum]])
         {
             //spawn is not available
             return false;
         }
         else
         {
+            //reset player's plane
             player.transform.position = list[spawnNum].position;
             player.transform.rotation = list[spawnNum].rotation;
-            //reset player's plane
 
             return true;
         }
 
     }
 
-
-
-    public IEnumerator CheckSpawn(float interval, int team, GameObject player)
+    public IEnumerator CheckSpawn()
     {
         bool spawned = false;
-        while (!spawned && PlayerManager.LocalPlayerInstance == null)
+        while (!spawned)
         {
-            yield return new WaitForSeconds(interval);
+            yield return new WaitForSeconds(1f);
+            spawned = Respawn();
+            Debug.Log("Checking spawn.... ");
+            Debug.Log($"{spawned}");
 
-            //check if can spawn
-            if (Spawn(team, player))
-            {
-                spawned = true;
-            }
         }
     }
 
     public IEnumerator CheckSpawnNew(float interval)
     {
         bool spawned = false;
-        while (!spawned && PlayerManager.LocalPlayerInstance == null)
+        while (!spawned && GameManager.LocalPlayerInstance == null)
         {
             yield return new WaitForSeconds(interval);
 
@@ -133,7 +134,15 @@ public class SpawnManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            this.team = (bool)stream.ReceiveNext();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                //dont recieve data from clients
+            }
+            else
+            {
+                //read data from master client
+                this.team = (bool)stream.ReceiveNext();
+            }
         }
     }
 }

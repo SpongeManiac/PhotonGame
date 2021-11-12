@@ -120,7 +120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895947195561914060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.019557886, y: 0.01, z: 4.38}
+  m_LocalPosition: {x: -0.019557886, y: 0.01, z: 5.47}
   m_LocalScale: {x: 1.6949153, y: 1.6949153, z: 1.6949153}
   m_Children: []
   m_Father: {fileID: 7917602515021105609}
@@ -1115,9 +1115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
-  escMenu: {fileID: 0}
   playerAnimator: {fileID: 2414350849504655010}
-  camera: {fileID: 0}
   camPosOffset: {fileID: 5956671266497934699}
   camLookOffset: {fileID: 3472785191772008242}
   speed: 40
@@ -1135,7 +1133,6 @@ MonoBehaviour:
   attackPoint: {fileID: 8971726730309733776}
   allowInvoke: 1
   magazineText: {fileID: 0}
-  skyboxManager: {fileID: 0}
   playerBody: {fileID: 1202598188503647674}
 --- !u!54 &1202598188503647674
 Rigidbody:
