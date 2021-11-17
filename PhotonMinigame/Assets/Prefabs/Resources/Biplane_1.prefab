@@ -1128,6 +1128,9 @@ MonoBehaviour:
   attackPoint: {fileID: 8971726730309733776}
   allowInvoke: 1
   magazineText: {fileID: 0}
+  healthText: {fileID: 0}
+  maxHealth: 100
+  health: 100
   playerBody: {fileID: 1202598188503647674}
 --- !u!54 &1202598188503647674
 Rigidbody:
