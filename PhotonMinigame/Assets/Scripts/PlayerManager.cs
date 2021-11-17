@@ -37,6 +37,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public Text magazineText;
 
+    public int health;
+
     int bulletsLeft, bulletsShot;
 
     bool shooting, readyToShoot, reloading;
@@ -117,7 +119,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             fire
             };
             GameManager.LocalPlayerInstance = gameObject;
-            
+            bulletsLeft = magazineSize;
+            readyToShoot = true;
+            magazineText = GameObject.Find("Magazine").GetComponent<Text>();
+            health = 100;
 
         }
         else
@@ -125,9 +130,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             //disable collission, physics, etc
             playerBody.isKinematic = true;
         }
-        bulletsLeft = magazineSize;
-        readyToShoot = true;
-        magazineText = GameObject.Find("Magazine").GetComponent<Text>();
+
     }
 
     
@@ -322,5 +325,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         bulletsLeft = magazineSize;
         reloading = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "bullet")
+        {
+            health -= 10;
+            Debug.Log(health);
+        }
     }
 }

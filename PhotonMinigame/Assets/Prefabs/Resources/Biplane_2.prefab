@@ -1121,7 +1121,7 @@ MonoBehaviour:
   camLookOffset: {fileID: 3472785191772008242}
   speed: 40
   baseSpeed: 40
-  bullet: {fileID: 72023859358148579, guid: dbb18b49aab818445b4b06ef52d78af2, type: 3}
+  bullet: {fileID: 72023859358148579, guid: 26f2ee7de48effa48b4778fe33fcaba0, type: 3}
   shootForce: 300
   upwardForce: 0
   magazineSize: 100
@@ -1134,6 +1134,7 @@ MonoBehaviour:
   attackPoint: {fileID: 8971726730309733776}
   allowInvoke: 1
   magazineText: {fileID: 0}
+  health: 0
   playerBody: {fileID: 1202598188503647674}
 --- !u!54 &1202598188503647674
 Rigidbody:

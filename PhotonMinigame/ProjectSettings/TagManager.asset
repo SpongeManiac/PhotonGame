@@ -9,6 +9,7 @@ TagManager:
   - Team1
   - GameManager
   - HUD
+  - bullet
   layers:
   - Default
   - TransparentFX
