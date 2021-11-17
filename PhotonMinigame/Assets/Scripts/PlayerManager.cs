@@ -36,8 +36,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public bool allowInvoke = true;
 
     public Text magazineText;
-
-    public int health;
+    public Text healthText;
+    public int maxHealth = 100;
+    public int health = 100;
 
     int bulletsLeft, bulletsShot;
 
@@ -121,8 +122,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             GameManager.LocalPlayerInstance = gameObject;
             bulletsLeft = magazineSize;
             readyToShoot = true;
-            magazineText = GameObject.Find("Magazine").GetComponent<Text>();
-            health = 100;
+            magazineText = GameObject.FindGameObjectWithTag("Magazine").GetComponent<Text>();
+            healthText = GameObject.FindGameObjectWithTag("Health").GetComponent<Text>();
+            magazineText.text = "100/100";
+            healthText.text = "100/100";
 
         }
         else
@@ -192,7 +195,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
 
-            magazineText.text = bulletsLeft.ToString()+ " / " + magazineSize.ToString();
+            magazineText.text = $"{bulletsLeft}/{magazineSize}";
 
 
         }
@@ -329,10 +332,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "bullet")
+        if (photonView.IsMine)
         {
-            health -= 10;
-            Debug.Log(health);
+            if (collision.gameObject.tag == "bullet")
+            {
+                health -= 10;
+                healthText.text = $"{health}/100";
+                Debug.Log(health);
+            }
         }
     }
 }

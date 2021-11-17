@@ -10,6 +10,8 @@ TagManager:
   - GameManager
   - HUD
   - bullet
+  - Health
+  - Magazine
   layers:
   - Default
   - TransparentFX
