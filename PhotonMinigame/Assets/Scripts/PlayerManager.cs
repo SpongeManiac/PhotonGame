@@ -95,7 +95,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
             //Leftmouse fire      //keycode        //OnDown  //OnUp
 
-            fire = new KeyControl(KeyCode.C, () => shooting = true, () => shooting = false);
+            fire = new KeyControl(KeyCode.Space, () => shooting = true, () => shooting = false);
             engineToggle = new KeyControl(KeyCode.T, () => { }, () => { });
             turbo = new KeyControl(KeyCode.LeftShift, () => speed += 10, () => speed -= 10);
             esc = new KeyControl(KeyCode.Escape, () => { }, () => { GameManager.escMenu.SetActive(!GameManager.escMenu.activeInHierarchy);});
