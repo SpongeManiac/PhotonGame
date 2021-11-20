@@ -19,6 +19,7 @@ public class Projectile : MonoBehaviour
     public Transform attackPoint;
 
     public bool allowInvoke = true;
+    
 
     private void Awake()
     {

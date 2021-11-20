@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 
+
 public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     public bool team;
@@ -23,6 +24,11 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public float speed = 40f;
     public float baseSpeed = 40f;
+
+    
+    public AudioClip secondAudioClip;
+    public AudioClip thridAudioClip;
+    private AudioSource audio;
 
     public GameObject bullet;
 
@@ -77,6 +83,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Awake()
     {
+        audio = GetComponent<AudioSource>();
         if (photonView.IsMine)
         {
 
@@ -133,6 +140,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             //disable collission, physics, etc
             playerBody.isKinematic = true;
         }
+        
+        
 
     }
 
@@ -141,6 +150,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     void LateUpdate()
@@ -300,6 +310,18 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         bulletsLeft--;
         bulletsShot++;
 
+        if(bulletsLeft > 0 && Input.GetKeyDown(KeyCode.Space))
+        {
+            audio.PlayOneShot (secondAudioClip, 3f);
+            
+        }
+
+
+        if(bulletsLeft == 0 && Input.GetKeyDown(KeyCode.Space))
+        {
+            audio.PlayOneShot (thridAudioClip, 10f);
+        }
+
         //Invoke resetShot function (if not already invoked)
         if (allowInvoke)
         {
@@ -322,6 +344,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
+        audio.PlayOneShot (thridAudioClip, 10f);
+        
     }
 
     private void ReloadFinished()
