@@ -9,9 +9,11 @@ TagManager:
   - Team1
   - GameManager
   - HUD
-  - bullet
   - Health
   - Magazine
+  - Bullet1
+  - Bullet2
+  - bullet
   layers:
   - Default
   - TransparentFX

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8554514747161232589}
   - component: {fileID: 3200538517464179446}
   - component: {fileID: 4331003225791388807}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: planeBase
-  m_TagString: Untagged
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8971726730309733776}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,9 +137,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2735829837680682411}
   - component: {fileID: 5735076070129595815}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5027905536363426074}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FireFullEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,9 +211,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2929502906310344167}
   - component: {fileID: 4753785379848254162}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: WingTop
-  m_TagString: Untagged
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 8137693738327921431}
   - component: {fileID: 6751051989973851150}
   - component: {fileID: 766942616305113341}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: planeWings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6318771223726979138}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FireEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3472785191772008242}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: CameraLook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,9 +400,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2222124662099792578}
   - component: {fileID: 3367587628664824449}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 69981398444202278}
   - component: {fileID: 2528752627547298307}
   - component: {fileID: 5350617381350716906}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: planeWingSupports
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,9 +524,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1829426204180655645}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Colliders
-  m_TagString: Untagged
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -558,9 +558,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8018371401699815507}
   - component: {fileID: 1674443718294426908}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: WingBack
-  m_TagString: Untagged
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 9069236158081245620}
   - component: {fileID: 4417076067973383171}
   - component: {fileID: 5109064403433899992}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: planePropeller1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -684,7 +684,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5375151032815464806}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: EmberEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5956671266497934699}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: CameraOffset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,9 +745,9 @@ GameObject:
   m_Component:
   - component: {fileID: 988964712580386735}
   - component: {fileID: 5987414476617526827}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -790,7 +790,7 @@ GameObject:
   - component: {fileID: 9183214131496760991}
   - component: {fileID: 2883364578363533912}
   - component: {fileID: 6710122541969801219}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: planeTailFins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -872,7 +872,7 @@ GameObject:
   - component: {fileID: 2429929500164197105}
   - component: {fileID: 6569346550401699465}
   - component: {fileID: 4360303021631279309}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: planeNose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -969,9 +969,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6715923185335956780}
   - component: {fileID: 6544040991870126359}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1014,7 +1014,7 @@ GameObject:
   - component: {fileID: 6505871442063234359}
   - component: {fileID: 2820479858984415770}
   - component: {fileID: 638578635786284378}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: planePropeller2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1101,7 +1101,7 @@ GameObject:
   - component: {fileID: 4395189694227024740}
   - component: {fileID: 97710123946465704}
   - component: {fileID: -2836004689735702829}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Biplane_2
   m_TagString: Team2
   m_Icon: {fileID: 0}
@@ -1208,7 +1208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3959d3b5fb77a594aac2bd8b55b89e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  team: 1
   playerAnimator: {fileID: 2414350849504655010}
   camPosOffset: {fileID: 5956671266497934699}
   camLookOffset: {fileID: 3472785191772008242}
@@ -1216,7 +1216,8 @@ MonoBehaviour:
   baseSpeed: 40
   secondAudioClip: {fileID: 8300000, guid: cf43defe2ddf8cb4c8832bdaa5b5be79, type: 3}
   thridAudioClip: {fileID: 8300000, guid: d73c80569f9f78b4fa34cf506e1c184a, type: 3}
-  bullet: {fileID: 72023859358148579, guid: 26f2ee7de48effa48b4778fe33fcaba0, type: 3}
+  fireEffect: {fileID: 2203047329421294531}
+  bullet: {fileID: 72023859358148579, guid: 6fb0f64763b51d74bab704f944046423, type: 3}
   shootForce: 300
   upwardForce: 0
   magazineSize: 100
@@ -1231,7 +1232,7 @@ MonoBehaviour:
   magazineText: {fileID: 0}
   healthText: {fileID: 0}
   maxHealth: 100
-  health: 0
+  _health: 100
   playerBody: {fileID: 1202598188503647674}
 --- !u!54 &1202598188503647674
 Rigidbody:
@@ -1388,7 +1389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4345103824491637938}
   - component: {fileID: 2828421461754464403}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Propellers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1440,9 +1441,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7420385041288283576}
   - component: {fileID: 7805939093260052643}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1484,9 +1485,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6789251449818111857}
   - component: {fileID: 4555537394274592580}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: WingBottom
-  m_TagString: Untagged
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1530,9 +1531,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8156935392261924487}
   - component: {fileID: 3654508708046538882}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

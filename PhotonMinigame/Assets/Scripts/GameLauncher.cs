@@ -13,6 +13,7 @@ public class GameLauncher : MonoBehaviourPunCallbacks
 
     public GameObject connectControls;
     public GameObject joinControls;
+    public GameObject inputControls;
 
     public Text playerNameInput;
     public Text roomNameInput;
@@ -66,6 +67,7 @@ public class GameLauncher : MonoBehaviourPunCallbacks
         {
             //joinControls.SetActive(true);
             connectControls.SetActive(false);
+            joinControls.SetActive(true);
         }
         else
         {

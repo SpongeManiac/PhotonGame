@@ -92,7 +92,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks, IPunObservable
             //reset player's plane
             player.transform.position = list[spawnNum].position;
             player.transform.rotation = list[spawnNum].rotation;
-
+            playerManager.dead = false;
             return true;
         }
 
@@ -134,15 +134,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                //dont recieve data from clients
-            }
-            else
-            {
-                //read data from master client
-                this.team = (bool)stream.ReceiveNext();
-            }
+            team = (bool)stream.ReceiveNext();
         }
     }
 }

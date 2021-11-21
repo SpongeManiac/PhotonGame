@@ -7,16 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    public SpawnManager spawnManager;
+    public SpawnManager spwnManager;
     public SkyboxManager skyboxManager;
     public GameObject escapeMenu;
+    public GameObject dethMenu;
 
+    public static SpawnManager spawnManager;
     public static GameObject escMenu;
+    public static GameObject deathMenu;
     public static GameObject LocalPlayerInstance;
 
     public void Awake()
     {
+        spawnManager = spwnManager;
         escMenu = escapeMenu;
+        deathMenu = dethMenu;
     }
 
     public void Start()

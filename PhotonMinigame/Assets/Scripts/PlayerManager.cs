@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public AudioClip secondAudioClip;
     public AudioClip thridAudioClip;
     private AudioSource audio;
-
+    public GameObject fireEffect;
     public GameObject bullet;
 
     public float shootForce, upwardForce;
@@ -44,7 +44,54 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public Text magazineText;
     public Text healthText;
     public int maxHealth = 100;
-    public int health = 100;
+    public int _health = 100;
+    bool _dead = false;
+    public bool dead
+    {
+        get
+        {
+            return _dead;
+        }
+        set
+        {
+            if (value && value != _dead)
+            {
+                ToggleDeathMenu();
+                //start respawn counter
+                GameObject deathMenu = GameManager.deathMenu;
+                RespawnCounter counter = deathMenu.GetComponent<RespawnCounter>();
+                counter.StartCountdown();
+            }
+            else if (value != _dead)
+            {
+                //player is alive again, reset ammo and health
+                health = maxHealth;
+                ReloadFinished();
+                ToggleDeathMenu();
+            }
+            _dead = value;
+        }
+    }
+    public int health
+    {
+        get
+        {
+            return _health;
+        }
+        set
+        {
+            if (value <= 0)
+            {
+                value = 0;
+                if (!dead && photonView.IsMine)
+                {
+                    //player is dead
+                    dead = true;
+                }
+            }
+            _health = value;
+        }
+    }
 
     int bulletsLeft, bulletsShot;
 
@@ -164,9 +211,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            
-
-            //recieve player input
+            healthText.text = $"{health}/{maxHealth}";
+            if (!dead)
+            {
+//recieve player input
             foreach (var key in boundKeys)
             {
                 //Debug.Log("Checking: "+key);
@@ -196,18 +244,29 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             {
                 //Reload automatically when trying to shoot without ammo
                 if (readyToShoot && shooting && !reloading && bulletsLeft <= 0) Reload();
-
-                //Shooting
-                if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
-                {
-                    bulletsShot = 0;
-                    Shoot();
+                    //Shooting
+                    if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+                    {
+                        bulletsShot = 0;
+                        Shoot();
+                        magazineText.text = $"{bulletsLeft}/{magazineSize}";
+                    }
                 }
             }
-
-            magazineText.text = $"{bulletsLeft}/{magazineSize}";
-
-
+            else
+            {
+                //remove any previously pressed keys except for esc button
+                for (int i = pressedKeys.Count; i > 0; i--)
+                {
+                    var key = pressedKeys[i];
+                    if (key.key == esc.key)
+                    {
+                        continue;
+                    }
+                    key.keyUp.Invoke();
+                    pressedKeys.RemoveAt(i);
+                }
+            }
         }
     }
 
@@ -265,47 +324,25 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            //we own this player, send other players our data
-            //stream.SendNext();
+            stream.SendNext(_health);
         }
-        else
+        else if(stream.IsReading)
         {
-            
+            _health = (int)stream.ReceiveNext();
         }
     }
 
+    void ToggleDeathMenu()
+    {
+        GameManager.deathMenu.SetActive(!GameManager.deathMenu.activeInHierarchy);
+        fireEffect.SetActive(!fireEffect.activeInHierarchy);
+    }
     private void Shoot()
     {
         readyToShoot = false;
 
-        //Find the exact hit position using a raycast
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-
-        //Check if ray hits something
-        Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit))
-            targetPoint = hit.point - new Vector3(0f,5f,0);
-        else
-            targetPoint = ray.GetPoint(75);
-
-        //Calculate direction from attackPoint to targetPoint
-        Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
-
-        //Calculate spread
-        float x = Random.Range(-spread, spread);
-        float y = Random.Range(-spread, spread);
-
-        //Calculate new direction with spread;
-        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
-
         //Instantiate bullet/projectile
         GameObject currentBullet = PhotonNetwork.Instantiate(bullet.name, attackPoint.position, transform.rotation);
-        currentBullet.transform.forward = directionWithSpread.normalized;
-
-        //Add force to bullet
-        currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
-        currentBullet.GetComponent<Rigidbody>().AddForce(Camera.main.transform.up * upwardForce, ForceMode.Impulse);
 
         bulletsLeft--;
         bulletsShot++;
@@ -352,18 +389,5 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         bulletsLeft = magazineSize;
         reloading = false;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (photonView.IsMine)
-        {
-            if (collision.gameObject.tag == "bullet")
-            {
-                health -= 10;
-                healthText.text = $"{health}/100";
-                Debug.Log(health);
-            }
-        }
     }
 }
