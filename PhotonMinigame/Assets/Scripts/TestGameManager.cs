@@ -12,7 +12,7 @@ public class TestGameManager : MonoBehaviourPunCallbacks
 
     public void Start()
     {
-        if (PlayerManager.LocalPlayerInstance == null)
+        if (GameManager.LocalPlayerInstance == null)
         {
             //create local player
             PhotonNetwork.Instantiate(playerPrefab.name, spawnLocation.position, Quaternion.identity, 0);

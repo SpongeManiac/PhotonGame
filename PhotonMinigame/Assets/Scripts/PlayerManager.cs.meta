@@ -3,7 +3,16 @@ guid: 3959d3b5fb77a594aac2bd8b55b89e26
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerAnimator: {instanceID: 0}
+  - camPosOffset: {instanceID: 0}
+  - camLookOffset: {instanceID: 0}
+  - secondAudioClip: {fileID: 8300000, guid: cf43defe2ddf8cb4c8832bdaa5b5be79, type: 3}
+  - bullet: {fileID: 152888, guid: 5624ee9da9d10514ea7b808e83979c85, type: 3}
+  - attackPoint: {instanceID: 0}
+  - magazineText: {instanceID: 0}
+  - healthText: {instanceID: 0}
+  - playerBody: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
