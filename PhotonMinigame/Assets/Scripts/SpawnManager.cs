@@ -86,13 +86,8 @@ public class SpawnManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             player.transform.position = list[spawnNum].position;
             player.transform.rotation = list[spawnNum].rotation;
-<<<<<<< Updated upstream
             //reset player's plane
 
-=======
-            //set player to not dead
-            playerManager.dead = false;
->>>>>>> Stashed changes
             return true;
         }
 
@@ -138,10 +133,6 @@ public class SpawnManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-<<<<<<< Updated upstream
-=======
-            //read data from master client
->>>>>>> Stashed changes
             this.team = (bool)stream.ReceiveNext();
         }
     }

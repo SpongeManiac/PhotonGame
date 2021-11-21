@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4331003225791388807}
   m_Layer: 0
   m_Name: planeBase
-  m_TagString: Team2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 5735076070129595815}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Team2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 4753785379848254162}
   m_Layer: 0
   m_Name: WingTop
-  m_TagString: Team2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 3367587628664824449}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Team2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 1829426204180655645}
   m_Layer: 0
   m_Name: Colliders
-  m_TagString: Team2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 1674443718294426908}
   m_Layer: 0
   m_Name: WingBack
-  m_TagString: Team2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 5987414476617526827}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Team2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -878,7 +878,7 @@ GameObject:
   - component: {fileID: 6544040991870126359}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Team2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1108,29 +1108,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3959d3b5fb77a594aac2bd8b55b89e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
   team: 0
   escMenu: {fileID: 0}
-=======
-  team: 1
->>>>>>> Stashed changes
   playerAnimator: {fileID: 2414350849504655010}
   camera: {fileID: 0}
   camPosOffset: {fileID: 5956671266497934699}
   camLookOffset: {fileID: 3472785191772008242}
   speed: 40
   baseSpeed: 40
-<<<<<<< Updated upstream
   bullet: {fileID: 0}
   shootForce: 0
-=======
-  secondAudioClip: {fileID: 8300000, guid: cf43defe2ddf8cb4c8832bdaa5b5be79, type: 3}
-  thridAudioClip: {fileID: 8300000, guid: d73c80569f9f78b4fa34cf506e1c184a, type: 3}
-  fireEffect: {fileID: 2203047329421294531}
-  bullet: {fileID: 72023859358148579, guid: e501cd84dcd187f47a8c19029385e5f1, type: 3}
-  colliders: []
-  shootForce: 300
->>>>>>> Stashed changes
   upwardForce: 0
   magazineSize: 0
   bulletsPerTap: 0
@@ -1141,12 +1128,6 @@ MonoBehaviour:
   allowButtonHold: 0
   attackPoint: {fileID: 0}
   allowInvoke: 1
-<<<<<<< Updated upstream
-=======
-  magazineText: {fileID: 0}
-  healthText: {fileID: 0}
-  maxHealth: 100
->>>>>>> Stashed changes
   playerBody: {fileID: 1202598188503647674}
 --- !u!54 &1202598188503647674
 Rigidbody:
@@ -1247,7 +1228,7 @@ GameObject:
   - component: {fileID: 7805939093260052643}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Team2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1291,7 +1272,7 @@ GameObject:
   - component: {fileID: 4555537394274592580}
   m_Layer: 0
   m_Name: WingBottom
-  m_TagString: Team2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1337,7 +1318,7 @@ GameObject:
   - component: {fileID: 3654508708046538882}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Team2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

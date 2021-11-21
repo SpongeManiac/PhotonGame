@@ -27,19 +27,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public float speed = 40f;
     public float baseSpeed = 40f;
 
-<<<<<<< Updated upstream
-=======
-    
-    public AudioClip secondAudioClip;
-    public AudioClip thridAudioClip;
-    private AudioSource audio;
-
-    public GameObject fireEffect;
-
->>>>>>> Stashed changes
     public GameObject bullet;
-
-    public List<Collider> colliders;
 
     public float shootForce, upwardForce;
     public int magazineSize, bulletsPerTap;
@@ -50,66 +38,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public bool allowInvoke = true;
 
-<<<<<<< Updated upstream
-=======
-    public Text magazineText;
-    public Text healthText;
-    public int maxHealth = 100;
-    bool _dead = false;
-    public bool dead
-    {
-        get
-        {
-            return _dead;
-        }
-        set
-        {
-            if (value && value != _dead)
-            {
-                ToggleDeathMenu();
-                //start respawn counter
-                GameObject deathMenu = GameManager.deathMenu;
-                RespawnCounter counter = deathMenu.GetComponent<RespawnCounter>();
-                counter.StartCountdown();
-            }
-            else if(value != _dead)
-            {
-                //player is alive again, reset ammo and health
-                health = maxHealth;
-                ReloadFinished();
-                ToggleDeathMenu();
-            }
-            _dead = value;
-        }
-    }
-
-    int _health = 100;
-    public int health
-    {
-        get
-        {
-            return _health;
-        }
-        set
-        {
-            if(value <= 0)
-            {
-                value = 0;
-                if (!dead && photonView.IsMine)
-                {
-                    //player is dead
-                    dead = true;
-                }
-            }
-            if (photonView.IsMine)
-            {
-                healthText.text = $"{health}/{maxHealth}";
-            }
-            _health = value;
-        }
-    }
-
->>>>>>> Stashed changes
     int bulletsLeft, bulletsShot;
 
     bool shooting, readyToShoot, reloading;
@@ -137,7 +65,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     KeyControl turbo;
     KeyControl esc;
 
-    List<KeyControl> availableKeys = new List<KeyControl>();
     List<KeyControl> boundKeys = new List<KeyControl>();
     List<KeyControl> pressedKeys = new List<KeyControl>();
 
@@ -172,7 +99,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             turbo = new KeyControl(KeyCode.LeftShift, () => speed += 10, () => speed -= 10);
             esc = new KeyControl(KeyCode.Escape, () => { }, () => { escMenu.SetActive(!escMenu.activeInHierarchy); });
 
-            availableKeys = new List<KeyControl> {
+            boundKeys = new List<KeyControl> {
             forward,
             //back,
             //left,
@@ -190,39 +117,18 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             turbo,
             esc
             };
-<<<<<<< Updated upstream
             PlayerManager.LocalPlayerInstance = gameObject;
             camera = Camera.main;
             escMenu = GameObject.FindGameObjectWithTag("EscMenu");
-=======
-
-            boundKeys = new List<KeyControl>(availableKeys);
-
-            GameManager.LocalPlayerInstance = gameObject;
-            bulletsLeft = magazineSize;
-            readyToShoot = true;
-            magazineText = GameObject.FindGameObjectWithTag("Magazine").GetComponent<Text>();
-            healthText = GameObject.FindGameObjectWithTag("Health").GetComponent<Text>();
-            magazineText.text = "100/100";
-            healthText.text = "100/100";
->>>>>>> Stashed changes
 
         }
         else
         {
-            //only update other player positions through photon
+            //disable collission, physics, etc
             playerBody.isKinematic = true;
-            //foreach (var collider in colliders)
-            //{
-            //    //make collider a trigger
-            //    collider.isTrigger = true;
-            //}
         }
-<<<<<<< Updated upstream
         bulletsLeft = magazineSize;
         readyToShoot = true;
-=======
->>>>>>> Stashed changes
     }
 
     
@@ -244,68 +150,32 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            if (!dead)
+            
+
+            //recieve player input
+            foreach (var key in boundKeys)
             {
-                //recieve player input
-                foreach (var key in boundKeys)
+                //Debug.Log("Checking: "+key);
+                //if key is pressed and is not already pressed, add key to pressed keys
+                if (Input.GetKeyDown(key.key) && !pressedKeys.Contains(key))
                 {
-                    //Debug.Log("Checking: "+key);
-                    //if key is pressed and is not already pressed, add key to pressed keys
-                    if (Input.GetKeyDown(key.key) && !pressedKeys.Contains(key))
-                    {
-                        //Debug.Log("Keydown: "+key.key);
-                        //execute key down action
-                        key.keyDown.Invoke();
-                        //add key to list of pressed keys
-                        pressedKeys.Add(key);
-                    }
-
-                    if (Input.GetKeyUp(key.key) && pressedKeys.Contains(key))
-                    {
-                        //Debug.Log("Keyup: "+key.key);
-                        //execute key up action
-                        key.keyUp.Invoke();
-                        //remove key from list of pressed keys
-                        pressedKeys.Remove(key);
-                    }
-
+                    //Debug.Log("Keydown: "+key.key);
+                    //execute key down action
+                    key.keyDown.Invoke();
+                    //add key to list of pressed keys
+                    pressedKeys.Add(key);
                 }
 
-                //check if player is shooting
-                if (shooting)
+                if (Input.GetKeyUp(key.key) && pressedKeys.Contains(key))
                 {
-                    //Reload automatically when trying to shoot without ammo
-                    if (readyToShoot && shooting && !reloading && bulletsLeft <= 0) Reload();
-
-                    //Shooting
-                    if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
-                    {
-                        bulletsShot = 0;
-                        Shoot();
-                    }
+                    //Debug.Log("Keyup: "+key.key);
+                    //execute key up action
+                    key.keyUp.Invoke();
+                    //remove key from list of pressed keys
+                    pressedKeys.Remove(key);
                 }
-<<<<<<< Updated upstream
             }
             MyInput();
-=======
-
-                magazineText.text = $"{bulletsLeft}/{magazineSize}";
-            }
-            else
-            {
-                //remove any previously pressed keys except for esc button
-                for(int i = pressedKeys.Count; i > 0; i--)
-                {
-                    var key = pressedKeys[i];
-                    if (key.key == esc.key)
-                    {
-                        continue;
-                    }
-                    key.keyUp.Invoke();
-                    pressedKeys.RemoveAt(i);
-                }
-            }
->>>>>>> Stashed changes
         }
     }
 
@@ -364,16 +234,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             //we own this player, send other players our data
-            stream.SendNext(_health);
+            //stream.SendNext();
         }
         else
         {
-            _health = (int)stream.ReceiveNext();
+            
         }
     }
 
 
-<<<<<<< Updated upstream
     private void MyInput()
     {
         //if (allowbuttonhold) shooting = input.getkey(keycode.mouse0);
@@ -391,12 +260,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
             Shoot();
         }
-=======
-    void ToggleDeathMenu()
-    {
-        GameManager.deathMenu.SetActive(!GameManager.deathMenu.activeInHierarchy);
-        fireEffect.SetActive(!fireEffect.activeInHierarchy);
->>>>>>> Stashed changes
     }
 
     private void Shoot()
@@ -425,17 +288,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
 
         //Instantiate bullet/projectile
-<<<<<<< Updated upstream
         GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
         currentBullet.transform.forward = directionWithSpread.normalized;
 
         //Add force to bullet
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Rigidbody>().AddForce(camera.transform.up * upwardForce, ForceMode.Impulse);
-=======
-        GameObject currentBullet = PhotonNetwork.Instantiate(bullet.name, attackPoint.position, transform.rotation);
-        
->>>>>>> Stashed changes
 
         bulletsLeft--;
         bulletsShot++;
@@ -462,10 +320,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
-<<<<<<< Updated upstream
-=======
-        audio.PlayOneShot(thridAudioClip, 10f);
->>>>>>> Stashed changes
     }
 
     private void ReloadFinished()
@@ -473,9 +327,4 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         bulletsLeft = magazineSize;
         reloading = false;
     }
-<<<<<<< Updated upstream
 }
-=======
-
-}
->>>>>>> Stashed changes
