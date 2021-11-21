@@ -5,6 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - EscMenu
+<<<<<<< Updated upstream
+=======
+  - Team2
+  - Team1
+  - GameManager
+  - HUD
+  - bullet
+  - Health
+  - Magazine
+  - Bullet1
+  - Bullet2
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
