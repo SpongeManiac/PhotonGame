@@ -29,6 +29,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public AudioClip secondAudioClip;
     public AudioClip thridAudioClip;
     private AudioSource audio;
+    public float nextSoundTime=0;
     public GameObject fireEffect;
     public GameObject bullet;
 
@@ -347,10 +348,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         bulletsLeft--;
         bulletsShot++;
 
-        if(bulletsLeft > 0 && Input.GetKeyDown(KeyCode.Space))
+        if(bulletsLeft > 0 &&  Time.time>=nextSoundTime && Input.GetKeyDown(KeyCode.Space))
         {
             audio.PlayOneShot (secondAudioClip, 3f);
-            
+            nextSoundTime = Time.time +secondAudioClip.length;
         }
 
 
